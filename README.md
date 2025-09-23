@@ -1,6 +1,11 @@
 # biscuit-scoop-bucket
 A personal Scoop bucket containing manifests for apps, tools, and software that aren't available in the official Scoop buckets.
 
+## Available Apps
+
+- **Apollo**: Self-hosted desktop stream host (Sunshine fork) for Moonlight/Artemis
+- **Firestorm Beta**: Latest beta versions of the Firestorm Second Life viewer
+
 ## Helper Scripts
 
 The [`helpers/`](helpers/) directory contains maintenance scripts for updating manifests:

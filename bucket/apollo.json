@@ -1,0 +1,44 @@
+{
+  "version": "0.4.6",
+  "description": "Self-hosted desktop stream host (Sunshine fork) for Moonlight/Artemis",
+  "homepage": "https://github.com/ClassicOldSong/Apollo",
+  "license": "GPL-3.0-only",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/ClassicOldSong/Apollo/releases/download/v0.4.6/Apollo-0.4.6.exe",
+      "hash": "skip"
+    }
+  },
+  "installer": {
+    "script": [
+      "$inst = \"$dir\\Apollo-$version.exe\"",
+      "# Try NSIS silent first (/S); if it fails, try Inno (/VERYSILENT /NORESTART)",
+      "try {",
+      "  Start-Process -FilePath $inst -ArgumentList '/S' -Wait -NoNewWindow -PassThru | Out-Null",
+      "} catch {",
+      "  Start-Process -FilePath $inst -ArgumentList '/VERYSILENT /NORESTART' -Wait -NoNewWindow -PassThru | Out-Null",
+      "}"
+    ]
+  },
+  "uninstaller": {
+    "script": [
+      "$uninst = (Get-ItemProperty 'HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*' | Where-Object { $_.DisplayName -like 'Apollo*' }).UninstallString",
+      "if (-not $uninst) { $uninst = (Get-ItemProperty 'HKLM:\\Software\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*' | Where-Object { $_.DisplayName -like 'Apollo*' }).UninstallString }",
+      "if ($uninst) { Start-Process -FilePath 'cmd.exe' -ArgumentList \"/c $uninst /SILENT\" -Wait }"
+    ]
+  },
+  "checkver": {
+    "github": "https://github.com/ClassicOldSong/Apollo"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/ClassicOldSong/Apollo/releases/download/v$version/Apollo-$version.exe"
+      }
+    }
+  },
+  "notes": [
+    "Apollo installs via a system installer; Scoop manages download and upgrades but files live under Program Files.",
+    "After install, open the Apollo UI from the tray icon or http://localhost:47990 (default) to pair Moonlight clients."
+  ]
+}
