@@ -14,9 +14,9 @@
       "$inst = \"$dir\\Apollo-$version.exe\"",
       "# Try NSIS silent first (/S); if it fails, try Inno (/VERYSILENT /NORESTART)",
       "try {",
-      "  Start-Process -FilePath $inst -ArgumentList '/S' -Wait -NoNewWindow -PassThru | Out-Null",
+      "  Start-Process -FilePath $inst -ArgumentList '/S' -Wait -NoNewWindow -Verb RunAs -PassThru | Out-Null",
       "} catch {",
-      "  Start-Process -FilePath $inst -ArgumentList '/VERYSILENT /NORESTART' -Wait -NoNewWindow -PassThru | Out-Null",
+      "  Start-Process -FilePath $inst -ArgumentList '/VERYSILENT /NORESTART' -Wait -NoNewWindow -Verb RunAs -PassThru | Out-Null",
       "}"
     ]
   },
