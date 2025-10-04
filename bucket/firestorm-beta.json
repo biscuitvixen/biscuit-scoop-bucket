@@ -1,13 +1,13 @@
 {
-  "version": "7.2.2.79281",
+  "version": "7.2.2.79356",
   "description": "Firestorm Viewer Beta — pre-release (Early Access) build",
   "homepage": "https://www.firestormviewer.org/",
   "license": "GPL-2.0-or-later",
   "depends": "7zip",
   "architecture": {
     "64bit": {
-      "url": "https://downloads.firestormviewer.org/preview/windows/Phoenix-Firestorm-Betax64_AVX2-7-2-2-79281_Setup.exe",
-      "hash": "sha256:874F22724BF3206C28EC70559D4613FDD28183A7F58EB720DEE648090E5AE4CC"
+      "url": "https://downloads.firestormviewer.org/preview/windows/Phoenix-Firestorm-Betax64_AVX2-7-2-2-79356_Setup.exe",
+      "hash": "sha256:65780AEBFB6D87EA70F73C3B1ADA1596DBEFAA0D656BCF319AD7199F02EE64F9"
     }
   },
   "installer": {
