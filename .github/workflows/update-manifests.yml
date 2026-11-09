@@ -1,0 +1,119 @@
+name: Update manifests
+
+# Runs Scoop's checkver on every manifest that has checkver/autoupdate, and
+# commits any version bumps straight to main. The 7-day cooldown lives in each
+# manifest's checkver script, so it applies here and to manual runs alike.
+# Firestorm manifests have no checkver and are skipped automatically.
+
+on:
+  schedule:
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+
+# Read-only by default; the update job widens it to push its commits.
+permissions:
+  contents: read
+
+concurrency:
+  group: update-manifests
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      # Keeps the token in the git config so the commits can be pushed
+      - name: Check out bucket
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Pinned to a release commit, since this code runs with push access.
+      # Dependabot cannot move a ref input, so bump it by hand.
+      - name: Check out Scoop (for checkver)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ScoopInstaller/Scoop
+          ref: e6aa3b366bdee8ed138c1e0f7b85192ebdd35d0f # v0.6.0
+          path: _scoop
+          persist-credentials: false
+
+      - name: Check for updates and commit
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          . ./_scoop/lib/core.ps1
+          . ./_scoop/lib/versions.ps1
+
+          # Remember each manifest's version before checkver touches anything
+          $before = @{}
+          foreach ($file in Get-ChildItem bucket/*.json) {
+            $before[$file.Name] = (Get-Content $file -Raw | ConvertFrom-Json).version
+          }
+
+          # Errors for individual apps are printed but do not stop the run
+          $ErrorActionPreference = 'Continue'
+          & ./_scoop/bin/checkver.ps1 -App '*' -Dir bucket -Update
+          $ErrorActionPreference = 'Stop'
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+          $committed = 0
+          foreach ($path in git diff --name-only -- bucket) {
+            $name = Split-Path $path -Leaf
+            $app = [IO.Path]::GetFileNameWithoutExtension($name)
+            $old = $before[$name]
+            $new = (Get-Content $path -Raw | ConvertFrom-Json).version
+
+            # checkver -Update rewrites on any difference, including older
+            # versions. Only keep real upgrades.
+            if ((Compare-Version -ReferenceVersion $old -DifferenceVersion $new) -ne 1) {
+              Write-Host "Skipping $app`: $new is not newer than $old"
+              git checkout -- $path
+              continue
+            }
+
+            git add -- $path
+            git commit -m "Update $app to $new" -m "Automatic update from version $old by the scheduled checkver run."
+            $committed++
+          }
+
+          if ($committed -gt 0) {
+            git push origin HEAD:main
+          } else {
+            Write-Host 'No updates.'
+          }
+
+      # Warns on the run summary when a Scoop release has served the same
+      # cooldown as the manifests but the pin above has not moved to it.
+      # Runs last and cannot fail the job, so it never holds up updates.
+      - name: Check the Scoop pin
+        continue-on-error: true
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = ./scripts/github-cooldown.ps1 -Repo ScoopInstaller/Scoop -Days 7
+          if (-not $tag) { return }
+
+          # Resolve the tag to its commit; annotated tags point at a tag
+          # object first
+          $headers = @{
+            Authorization = "Bearer $env:GITHUB_TOKEN"
+            'User-Agent'  = 'scoop-pin-check'
+          }
+          $ref = Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/ScoopInstaller/Scoop/git/ref/tags/$tag"
+          $released = $ref.object.sha
+          if ($ref.object.type -eq 'tag') {
+            $released = (Invoke-RestMethod -Headers $headers -Uri $ref.object.url).object.sha
+          }
+
+          $pinned = git -C _scoop rev-parse HEAD
+          if ($released -ne $pinned) {
+            Write-Host "::warning title=Scoop pin out of date::Scoop $tag has been out for at least 7 days, but the workflow still pins $($pinned.Substring(0, 12)). Bump the ref on the Scoop checkout step."
+          } else {
+            Write-Host "Scoop pin is current ($tag)."
+          }
