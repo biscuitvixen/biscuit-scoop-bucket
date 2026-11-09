@@ -5,6 +5,7 @@ A personal Scoop bucket containing manifests for apps, tools, and software that 
 
 - **Apollo**: Self-hosted desktop stream host (Sunshine fork) for Moonlight/Artemis
 - **Firestorm Beta**: Latest beta versions of the Firestorm Second Life viewer
+- **Aurora**: Modern Second Life viewer written in Rust, with a Vulkan renderer
 
 ## Helper Scripts
 
