@@ -2,7 +2,7 @@
   "version": "7.2.3.80035",
   "description": "Firestorm Viewer Beta — pre-release (Early Access) build",
   "homepage": "https://www.firestormviewer.org/",
-  "license": "GPL-2.0-or-later",
+  "license": "LGPL-2.1-only",
   "depends": "7zip",
   "architecture": {
     "64bit": {
