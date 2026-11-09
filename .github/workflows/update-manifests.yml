@@ -3,7 +3,6 @@ name: Update manifests
 # Runs Scoop's checkver on every manifest that has checkver/autoupdate, and
 # commits any version bumps straight to main. The 7-day cooldown lives in each
 # manifest's checkver script, so it applies here and to manual runs alike.
-# Firestorm manifests have no checkver and are skipped automatically.
 
 on:
   schedule:

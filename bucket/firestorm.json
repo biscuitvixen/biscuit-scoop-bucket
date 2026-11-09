@@ -21,6 +21,18 @@
       "Firestorm"
     ]
   ],
+  "checkver": {
+    "url": "https://api.github.com/repos/FirestormViewer/phoenix-firestorm/git/matching-refs/tags/Firestorm_Release_",
+    "script": "& \"$(Split-Path $file)\\..\\scripts\\firestorm-latest.ps1\" -Channel Release -Days 7 -Token $GitHubToken",
+    "regex": "^([\\d.]+)$"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://downloads.firestormviewer.org/release/windows/Phoenix-Firestorm-Releasex64_AVX2-$dashVersion_Setup.exe#/dl.7z"
+      }
+    }
+  },
   "notes": [
     "This is the AVX2 build, which needs a CPU from roughly 2013 or later.",
     "Settings and chat logs live in %APPDATA%\\Firestorm_x64, so they are shared with any other Firestorm install on this PC."
