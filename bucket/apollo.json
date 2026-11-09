@@ -28,7 +28,8 @@
     ]
   },
   "checkver": {
-    "github": "https://github.com/ClassicOldSong/Apollo"
+    "script": "& \"$(Split-Path $file)\\..\\scripts\\github-cooldown.ps1\" -Repo 'ClassicOldSong/Apollo' -Days 7 -Token $GitHubToken",
+    "regex": "^v([\\d.]+)$"
   },
   "autoupdate": {
     "architecture": {

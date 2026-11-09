@@ -30,7 +30,8 @@
     ]
   ],
   "checkver": {
-    "github": "https://github.com/SlimeVR/SlimeVR-Server"
+    "script": "& \"$(Split-Path $file)\\..\\scripts\\github-cooldown.ps1\" -Repo 'SlimeVR/SlimeVR-Server' -Days 7 -Token $GitHubToken",
+    "regex": "^v([\\d.]+)$"
   },
   "autoupdate": {
     "architecture": {

@@ -15,8 +15,8 @@
   },
   "bin": "vrc-get.exe",
   "checkver": {
-    "url": "https://api.github.com/repos/vrc-get/vrc-get/releases",
-    "regex": "\"tag_name\":\\s*\"v([\\d.]+)\""
+    "script": "& \"$(Split-Path $file)\\..\\scripts\\github-cooldown.ps1\" -Repo 'vrc-get/vrc-get' -Days 7 -Token $GitHubToken",
+    "regex": "^v([\\d.]+)$"
   },
   "autoupdate": {
     "architecture": {
