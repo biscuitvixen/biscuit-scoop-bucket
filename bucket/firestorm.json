@@ -1,0 +1,28 @@
+{
+  "version": "7.2.4.80712",
+  "description": "Firestorm Viewer, a third-party viewer for Second Life and OpenSim",
+  "homepage": "https://www.firestormviewer.org/",
+  "license": "LGPL-2.1-only",
+  "architecture": {
+    "64bit": {
+      "url": "https://downloads.firestormviewer.org/release/windows/Phoenix-Firestorm-Releasex64_AVX2-7-2-4-80712_Setup.exe#/dl.7z",
+      "hash": "46eff19c0030c2e9de56255d71ac476088ed170949a8a845821e7ff7acda16a0"
+    }
+  },
+  "installer": {
+    "script": [
+      "# Remove the NSIS installer's own files left over from extraction",
+      "Remove-Item -LiteralPath \"$dir\\`$PLUGINSDIR\", \"$dir\\[0]\" -Recurse -Force -ErrorAction SilentlyContinue"
+    ]
+  },
+  "shortcuts": [
+    [
+      "Firestorm-Releasex64.exe",
+      "Firestorm"
+    ]
+  ],
+  "notes": [
+    "This is the AVX2 build, which needs a CPU from roughly 2013 or later.",
+    "Settings and chat logs live in %APPDATA%\\Firestorm_x64, so they are shared with any other Firestorm install on this PC."
+  ]
+}

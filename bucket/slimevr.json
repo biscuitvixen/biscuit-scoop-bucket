@@ -1,0 +1,51 @@
+{
+  "version": "21.1.0",
+  "description": "SlimeVR Server, the desktop app for SlimeVR full-body trackers",
+  "homepage": "https://slimevr.dev/",
+  "license": "MIT|Apache-2.0",
+  "architecture": {
+    "64bit": {
+      "url": [
+        "https://github.com/SlimeVR/SlimeVR-Server/releases/download/v21.1.0/SlimeVR-win64.zip",
+        "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jre_x64_windows_hotspot_17.0.17_10.zip"
+      ],
+      "hash": [
+        "44e6ba40bd4f15205648818e318f50ed8f049b3b80d577a227aeef08f4d8c100",
+        "bd17db1cc08b3a8a98cedc7b8b8a203f683793be65a9ffbe4ceaacde71fc2b6b"
+      ],
+      "extract_dir": [
+        "",
+        "jdk-17.0.17+10-jre"
+      ],
+      "extract_to": [
+        "",
+        "jre"
+      ]
+    }
+  },
+  "shortcuts": [
+    [
+      "SlimeVR.exe",
+      "SlimeVR"
+    ]
+  ],
+  "checkver": {
+    "github": "https://github.com/SlimeVR/SlimeVR-Server"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": [
+          "https://github.com/SlimeVR/SlimeVR-Server/releases/download/v$version/SlimeVR-win64.zip",
+          "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jre_x64_windows_hotspot_17.0.17_10.zip"
+        ]
+      }
+    }
+  },
+  "notes": [
+    "This installs the SlimeVR app with the same bundled Java 17 runtime the official installer uses.",
+    "It does not install the SteamVR driver or the USB serial drivers for trackers. Get those from the official installer or the Steam version.",
+    "To let trackers connect over Wi-Fi, run firewall.bat from the install folder as administrator once.",
+    "Settings live in %APPDATA%\\dev.slimevr.SlimeVR and are shared with any other SlimeVR install. Don't run two copies at once."
+  ]
+}
