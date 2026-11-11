@@ -1,13 +1,13 @@
 {
-    "version": "0.9.5",
+    "version": "0.9.6",
     "description": "Modern Second Life viewer written in Rust, with a Vulkan renderer",
     "homepage": "https://aurora-viewer.org/",
     "license": "GPL-3.0-or-later",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/Aurora-Viewer/Aurora-Viewer/releases/download/v0.9.5/Aurora-Viewer-v0.9.5-windows-x64.zip",
-            "hash": "f794cfb78d009b048c3752205b47c5e01603063b37797b8844cc65e7075a47d6",
-            "extract_dir": "Aurora-Viewer-v0.9.5-windows-x64"
+            "url": "https://github.com/Aurora-Viewer/Aurora-Viewer/releases/download/v0.9.6/Aurora-Viewer-v0.9.6-windows-x64.zip",
+            "hash": "2fa17223986fa4831ec5ff48a25e7d7aef9324d226123a0a0ed0ba1e99db9210",
+            "extract_dir": "Aurora-Viewer-v0.9.6-windows-x64"
         }
     },
     "bin": [
