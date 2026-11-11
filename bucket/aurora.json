@@ -1,43 +1,43 @@
 {
-  "version": "0.9.4",
-  "description": "Modern Second Life viewer written in Rust, with a Vulkan renderer",
-  "homepage": "https://aurora-viewer.org/",
-  "license": "GPL-3.0-or-later",
-  "architecture": {
-    "64bit": {
-      "url": "https://github.com/Aurora-Viewer/Aurora-Viewer/releases/download/v0.9.4/Aurora-Viewer-v0.9.4-windows-x64.zip",
-      "hash": "c5a9c831e6407e60870da9cd7efe768bb718a8446055883c34aaf66f676e5ca6",
-      "extract_dir": "Aurora-Viewer-v0.9.4-windows-x64"
-    }
-  },
-  "bin": [
-    [
-      "aurora-viewer.exe",
-      "aurora"
-    ]
-  ],
-  "shortcuts": [
-    [
-      "aurora-viewer.exe",
-      "Aurora Viewer"
-    ]
-  ],
-  "checkver": {
-    "github": "https://github.com/Aurora-Viewer/Aurora-Viewer"
-  },
-  "autoupdate": {
+    "version": "0.9.5",
+    "description": "Modern Second Life viewer written in Rust, with a Vulkan renderer",
+    "homepage": "https://aurora-viewer.org/",
+    "license": "GPL-3.0-or-later",
     "architecture": {
-      "64bit": {
-        "url": "https://github.com/Aurora-Viewer/Aurora-Viewer/releases/download/v$version/Aurora-Viewer-v$version-windows-x64.zip",
-        "hash": {
-          "url": "$url.sha256"
-        },
-        "extract_dir": "Aurora-Viewer-v$version-windows-x64"
-      }
-    }
-  },
-  "notes": [
-    "Aurora has its own built-in updater. Settings, accounts and cache live in your user profile, so updating through Scoop (scoop update aurora) keeps them.",
-    "If you accept an update from inside Aurora instead, it replaces its files in place and Scoop will still list the old version until the next scoop update."
-  ]
+        "64bit": {
+            "url": "https://github.com/Aurora-Viewer/Aurora-Viewer/releases/download/v0.9.5/Aurora-Viewer-v0.9.5-windows-x64.zip",
+            "hash": "f794cfb78d009b048c3752205b47c5e01603063b37797b8844cc65e7075a47d6",
+            "extract_dir": "Aurora-Viewer-v0.9.5-windows-x64"
+        }
+    },
+    "bin": [
+        [
+            "aurora-viewer.exe",
+            "aurora"
+        ]
+    ],
+    "shortcuts": [
+        [
+            "aurora-viewer.exe",
+            "Aurora Viewer"
+        ]
+    ],
+    "checkver": {
+        "github": "https://github.com/Aurora-Viewer/Aurora-Viewer"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Aurora-Viewer/Aurora-Viewer/releases/download/v$version/Aurora-Viewer-v$version-windows-x64.zip",
+                "hash": {
+                    "url": "$url.sha256"
+                },
+                "extract_dir": "Aurora-Viewer-v$version-windows-x64"
+            }
+        }
+    },
+    "notes": [
+        "Aurora has its own built-in updater. Settings, accounts and cache live in your user profile, so updating through Scoop (scoop update aurora) keeps them.",
+        "If you accept an update from inside Aurora instead, it replaces its files in place and Scoop will still list the old version until the next scoop update."
+    ]
 }

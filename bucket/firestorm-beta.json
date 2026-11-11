@@ -1,41 +1,41 @@
 {
-  "version": "7.2.3.80035",
-  "description": "Firestorm Viewer Beta, the pre-release (Early Access) build",
-  "homepage": "https://www.firestormviewer.org/",
-  "license": "LGPL-2.1-only",
-  "architecture": {
-    "64bit": {
-      "url": "https://downloads.firestormviewer.org/preview/windows/Phoenix-Firestorm-Betax64_AVX2-7-2-3-80035_Setup.exe#/dl.7z",
-      "hash": "1d68201469efbca87759a9ff1784d9cfa3e6aeda9d173e5ad76a478d08f68744"
-    }
-  },
-  "installer": {
-    "script": [
-      "# Remove the NSIS installer's own files left over from extraction",
-      "Remove-Item -LiteralPath \"$dir\\`$PLUGINSDIR\", \"$dir\\[0]\" -Recurse -Force -ErrorAction SilentlyContinue"
-    ]
-  },
-  "shortcuts": [
-    [
-      "Firestorm-Betax64.exe",
-      "Firestorm Beta"
-    ]
-  ],
-  "checkver": {
-    "url": "https://api.github.com/repos/FirestormViewer/phoenix-firestorm/git/matching-refs/tags/Firestorm_Beta_",
-    "script": "& \"$(Split-Path $file)\\..\\scripts\\firestorm-latest.ps1\" -Channel Beta -Days 0 -Token $GitHubToken",
-    "regex": "^([\\d.]+)$"
-  },
-  "autoupdate": {
+    "version": "7.3.0.82931",
+    "description": "Firestorm Viewer Beta, the pre-release (Early Access) build",
+    "homepage": "https://www.firestormviewer.org/",
+    "license": "LGPL-2.1-only",
     "architecture": {
-      "64bit": {
-        "url": "https://downloads.firestormviewer.org/preview/windows/Phoenix-Firestorm-Betax64_AVX2-$dashVersion_Setup.exe#/dl.7z"
-      }
-    }
-  },
-  "notes": [
-    "This is the AVX2 build, which needs a CPU from roughly 2013 or later.",
-    "Only the newest beta installer stays on Firestorm's download host, so an out-of-date copy of this manifest fails to download; run scoop update first.",
-    "Settings and chat logs live in %APPDATA%\\Firestorm_x64, so they are shared with any other Firestorm install on this PC."
-  ]
+        "64bit": {
+            "url": "https://downloads.firestormviewer.org/preview/windows/Phoenix-Firestorm-Betax64_AVX2-7-3-0-82931_Setup.exe#/dl.7z",
+            "hash": "06b1d0f05a3b764c4c63f857b28545e40716955b63a0396014cb0f5acd58cffe"
+        }
+    },
+    "installer": {
+        "script": [
+            "# Remove the NSIS installer's own files left over from extraction",
+            "Remove-Item -LiteralPath \"$dir\\`$PLUGINSDIR\", \"$dir\\[0]\" -Recurse -Force -ErrorAction SilentlyContinue"
+        ]
+    },
+    "shortcuts": [
+        [
+            "Firestorm-Betax64.exe",
+            "Firestorm Beta"
+        ]
+    ],
+    "checkver": {
+        "url": "https://api.github.com/repos/FirestormViewer/phoenix-firestorm/git/matching-refs/tags/Firestorm_Beta_",
+        "script": "& \"$(Split-Path $file)\\..\\scripts\\firestorm-latest.ps1\" -Channel Beta -Days 0 -Token $GitHubToken",
+        "regex": "^([\\d.]+)$"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://downloads.firestormviewer.org/preview/windows/Phoenix-Firestorm-Betax64_AVX2-$dashVersion_Setup.exe#/dl.7z"
+            }
+        }
+    },
+    "notes": [
+        "This is the AVX2 build, which needs a CPU from roughly 2013 or later.",
+        "Only the newest beta installer stays on Firestorm's download host, so an out-of-date copy of this manifest fails to download; run scoop update first.",
+        "Settings and chat logs live in %APPDATA%\\Firestorm_x64, so they are shared with any other Firestorm install on this PC."
+    ]
 }
